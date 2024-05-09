@@ -5,10 +5,19 @@ class Jugador
 
 class Campo
 class Pieza 
+class P_C
+class P_I
+class P_T
+class P_Lr
+class P_Ll
+class P_Sr
+class P_Sl
 class Puntaje
 class Nivel
 class NumeroLinea
 class Limite
+class ObjetoDestruible
+class ObjetoIndestructible
 
 Juego "1" *-- "1" Jugador
 Jugador "1" *-- "1" Campo
@@ -20,8 +29,13 @@ Campo "1" *-- "*" Linea
 Campo "1" *-- "1" Limite
 NumeroLinea "10" --|> "1" Nivel 
 
-
-
-
+Pieza --|> ObjetoDestruible
+P_C --|> Pieza
+P_I --|> Pieza
+P_T --|> Pieza
+P_Lr --|> Pieza
+P_Ll --|> Pieza
+P_Sr --|> Pieza
+P_Sl --|> Pieza
 
 @enduml
