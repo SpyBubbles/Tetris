@@ -1,0 +1,27 @@
+@startuml Tetris
+
+class Juego
+class Jugador
+
+class Campo
+class Pieza 
+class Puntaje
+class Nivel
+class NumeroLinea
+class Limite
+
+Juego "1" *-- "1" Jugador
+Jugador "1" *-- "1" Campo
+Jugador "1" *-- "1" Puntaje
+Jugador "1" o-- "7" Pieza
+Campo "1" *-- "*" Nivel
+Campo "1" *-- "*" Pieza
+Campo "1" *-- "*" Linea
+Campo "1" *-- "1" Limite
+NumeroLinea "10" --|> "1" Nivel 
+
+
+
+
+
+@enduml
