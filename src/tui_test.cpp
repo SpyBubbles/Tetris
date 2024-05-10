@@ -30,12 +30,12 @@ int main(int argc, char const *argv[])
     int posY = 6;
 
     while (true){
-    fotograma++;
-    Element personaje = spinner(21,fotograma);
+    //fotograma++;
+    //Element personaje = spinner(21,fotograma);
     Decorator colorFondo = bgcolor(Color::DarkBlue);
     Decorator colorTexto = color(Color::Yellow);
     Element dibujo = border ({
-        hbox(personaje) | colorFondo | colorTexto 
+        hbox() | colorFondo | colorTexto 
     });
 
     Dimensions Alto = Dimension::Full();
