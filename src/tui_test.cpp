@@ -1,5 +1,6 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
+#include <ftxui/dom/node.hpp>
 #include <ftxui/screen/color.hpp>
 #include <iostream>
 #include <string>
@@ -15,7 +16,8 @@ int main(int argc, char const *argv[])
 {
     list<string> textos;
     fstream imagen;
-    imagen.open("./assets/Cubo/C.txt");
+    //imagen.open("./assets/Cubo/C.txt");
+    imagen.open("./assets/Linea/l1.txt");
 
     string linea;
     while (getline(imagen,linea))
@@ -31,14 +33,14 @@ int main(int argc, char const *argv[])
 
     while (true){
     //fotograma++;
-    //Element personaje = spinner(21,fotograma);
-    Decorator colorFondo = bgcolor(Color::DarkBlue);
-    Decorator colorTexto = color(Color::Yellow);
+    //Element personaje = spinner(21,fotograma);  
+    Decorator colorFondo = bgcolor(Color::GreenYellow);
+    Decorator colorTexto = color(Color::Black);
     Element dibujo = border ({
         hbox() | colorFondo | colorTexto 
     });
 
-    Dimensions Alto = Dimension::Full();
+    Dimensions Alto = Dimension::Fixed(20);
     Dimensions Ancho = Dimension::Fixed(25);
 
     Screen pantalla = Screen::Create(Ancho,Alto);
@@ -63,6 +65,5 @@ int main(int argc, char const *argv[])
     cout << reset;
     this_thread::sleep_for(0.1s);
     }
-    
     return 0;
 }
