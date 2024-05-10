@@ -1,7 +1,7 @@
 @startuml Tetris
 
 class Juego{
-    + IniciarJuego
+    + IniciarJuego()
 }
 class Jugador
 
@@ -15,10 +15,10 @@ class Pieza{
 class P_C
 class P_I
 class P_T
-class P_Lr
-class P_Ll
-class P_Sr
-class P_Sl
+class P_L
+class P_J
+class P_S
+class P_Z
 class Puntaje{
     + IncrementarPuntaje()
     + ObtenerPuntaje()
@@ -27,15 +27,15 @@ class Nivel{
     + IncrementarNivel
 }
 class NumeroLinea{
-    + IncrementarNumero
-    + ObtenerLineas
+    + IncrementarNumero()
+    + ObtenerLineas()
 }
 class Limite
 class ObjetoDestruible
 class ObjetoIndestructible
 class Coordenada{
-    + CoordenadaX
-    + CoordenadaY
+    - CoordenadaX
+    - CoordenadaY
 }
 
 Juego "1" *-- "1" Jugador
