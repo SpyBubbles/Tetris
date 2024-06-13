@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Juego.hpp"
 /*#include <stdio.h>                  // for getchar
 #include <iostream>
 #include <string>
@@ -8,8 +8,23 @@
 #include <fstream>
 #include <experimental/random>*/
 
-int main(int argc, char const *argv[])
+int main() //int argc, char const *argv[]
 {
-    std::cout << "Hola" << std::endl;
+
+    Juego juego;
+
+    // Game loop
+    while (juego.running()){ // Mientras la ventana este abierta
+    
+        // Update
+        juego.actualizar();
+
+
+        // Render
+        juego.renderizar();
+
+
+    }
+    
     return 0;
 }
