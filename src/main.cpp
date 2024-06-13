@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 #include "Juego.hpp"
 /*#include <stdio.h>                  // for getchar
 #include <iostream>
@@ -10,12 +11,11 @@
 
 int main() //int argc, char const *argv[]
 {
-
     Juego juego;
 
     // Game loop
     while (juego.running()){ // Mientras la ventana este abierta
-    
+
         // Update
         juego.actualizar();
 
