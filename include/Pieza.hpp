@@ -14,7 +14,7 @@ public:
     void RotarPz(int ind);    // rotar pieza
     void DesrotarPz(int ind); // En caso de que no pueda rotar
 
-}
+};
 
 Pieza::Pieza()
 {

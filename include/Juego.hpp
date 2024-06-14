@@ -4,17 +4,18 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <Campo.hpp>
 
 class Juego
 {
     private:
     // Variables
-
+    Campo campo;
 
     // Ventana
     sf::RenderWindow* window;
-    int heigt = 0;
-    int width = 0;
+    int heigt = 400;
+    int width = 400;
     sf::Event ev;
 
     void iniciaVariables();
@@ -38,8 +39,8 @@ void Juego::iniciaVariables(){
 };
 
 void Juego::iniciaVentana(){
-    this->width = sf::VideoMode::getDesktopMode().width;
-    this->heigt = sf::VideoMode::getDesktopMode().height;
+    //this->width = sf::VideoMode::getDesktopMode().width;
+    //this->heigt = sf::VideoMode::getDesktopMode().height;
     this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->heigt),"TETRIS",sf::Style::Titlebar | sf::Style::Close);
 }
 
@@ -81,6 +82,7 @@ void Juego::pollEventos(){
 
 void Juego::actualizar(){
     this->pollEventos();
+    campo.ActColoresTablero();
 }
 
 void Juego::renderizar(){
@@ -88,10 +90,9 @@ void Juego::renderizar(){
         @return void
         Renderiza los objetos del juego.
     */
-
-    this->window->clear(sf::Color(105, 55, 100, 255));
-
+    this->window->clear(sf::Color(20, 20, 20, 255)); // Modifica el color de fondo de la mitad derecha
+    
+    this->window->draw(campo);
     // Dibujar los objetos del Juego
-
     this->window->display();
 }
