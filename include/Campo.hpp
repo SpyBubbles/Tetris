@@ -29,7 +29,8 @@ public:
     Campo();
     bool InstalarPieza();
     bool ActTablero();
-    void ActColoresTablero();                                      // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
+    void ActColoresTablero();
+    void ActLimitTimer(int l);                                      // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
 };
 
@@ -119,7 +120,7 @@ bool Campo::ActTablero(){
     if(timer >= limitTimer){
         aux = 0;
         for(int i = 18; i >= 0; i--){
-            for(int j = 0; j < 20; j++){
+            for(int j = 0; j < 10; j++){
                 if(tablero[i][j] == -1){
                     if(tablero[i +1][j] <= 0) aux++;
                 }
@@ -128,31 +129,19 @@ bool Campo::ActTablero(){
         if (aux == 4){
             indY++;
             for(int i = 18; i >= 0; i--){
-                for(int j = 0; j < 20; j++){
+                for(int j = 0; j < 10; j++){
                     if(tablero[i][j] == -1){
                         tablero[i][j] = 0;
                         tablero[i+1][j] = -1;
                     }
                 }
             }
-            aux = 0;
-            for(int i = 18; i >= 0; i--){
-                for(int j = 0; j < 20; j++){
-                    if(tablero[i][j] == -1){
-                        if(tablero[i +1][j] <= 0) aux++;
-                    }
-                }
-            }
-            if (aux != 4){
-                for(int i = 19; i >= 0; i--){
-                    for(int j = 0; j < 20; j++){
-                        if(tablero[i][j] == -1) tablero[i][j] = indColorNewPieza;
-                    }        
-                }
-                limit = 1;
-            }
-
         }else{
+            for(int i = 19; i >= 0; i--){
+                for(int j = 0; j < 10; j++){
+                    if(tablero[i][j] == -1) tablero[i][j] = indColorNewPieza;
+                }        
+            }
             limit = 1;
         }
         timer = 0;
@@ -200,6 +189,10 @@ void Campo::ActColoresTablero()
             }
         }
     }
+}
+
+void Campo::ActLimitTimer(int l){
+    limitTimer = l;
 }
 
 void Campo::draw(sf::RenderTarget &rt, sf::RenderStates rs) const

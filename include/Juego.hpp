@@ -39,9 +39,8 @@ void Juego::iniciaVariables(){
 };
 
 void Juego::iniciaVentana(){
-    //this->width = sf::VideoMode::getDesktopMode().width;
-    //this->heigt = sf::VideoMode::getDesktopMode().height;
     this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->heigt),"TETRIS",sf::Style::Titlebar | sf::Style::Close );
+    this->window->setFramerateLimit(60); // Sin este ajuste, las piezas bajan extremadamente rápido
     campo.InstalarPieza();
 }
 
@@ -85,8 +84,18 @@ void Juego::pollEventos(){
 
 void Juego::actualizar(){
     this->pollEventos();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) campo.ActLimitTimer(5);
+    else{
+        campo.ActLimitTimer(30);
+    }
+
+    if(campo.ActTablero()){
+        if(!campo.InstalarPieza()){
+            cout << "Game Over" << endl;
+            this->window->close();
+        }
+    }
     campo.ActColoresTablero();
-    campo.ActTablero();
 }
 
 void Juego::renderizar(){
