@@ -41,7 +41,8 @@ void Juego::iniciaVariables(){
 void Juego::iniciaVentana(){
     //this->width = sf::VideoMode::getDesktopMode().width;
     //this->heigt = sf::VideoMode::getDesktopMode().height;
-    this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->heigt),"TETRIS",sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->heigt),"TETRIS",sf::Style::Titlebar | sf::Style::Close );
+    campo.InstalarPieza();
 }
 
 // Constructor y Destructor
@@ -75,6 +76,8 @@ void Juego::pollEventos(){
                     if (this->ev.key.code == sf::Keyboard::Escape){
                     this->window->close();
                 }
+            break;
+            default:
             break;
         }
     }

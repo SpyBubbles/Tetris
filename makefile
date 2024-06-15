@@ -1,6 +1,7 @@
 # Directorios de origen y destino
 SRC_DIR := src
 BIN_DIR := bin
+MAC := -L/usr/local/lib -I/usr/local/include
 
 SFML := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lbox2d
 
@@ -12,7 +13,7 @@ EXE_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%.exe,$(CPP_FILES))
 
 # Regla para compilar cada archivo .cpp y generar el archivo .exe correspondiente
 $(BIN_DIR)/%.exe: $(SRC_DIR)/%.cpp include/Juego.hpp
-	g++ $< -o $@ $(SFML) -Iinclude
+	g++ $< -o $@ $(SFML) -Iinclude -std=c++20
 
 # Regla por defecto para compilar todos los archivos .cpp
 all: $(EXE_FILES)
