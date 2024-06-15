@@ -19,12 +19,16 @@ private:
 
     int indX,indY;
 
+    int timer = 0;
+    int limitTimer = 30;
+
     int tablero[20][10];                     // Matriz que representa el estado del tablero del juego. Cada celda puede tener un valor que representa un tipo de pieza.
     sf::RectangleShape formaTablero[20][10]; // Matriz de formas rectangulares que se utilizan para dibujar el tablero en la ventana de SFML.
 
 public:
     Campo();
     bool InstalarPieza();
+    bool ActTablero();
     void ActColoresTablero();                                      // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
 };
@@ -106,6 +110,55 @@ bool Campo::InstalarPieza()
             break;
             }
     return true;
+}
+
+bool Campo::ActTablero(){
+    bool limit = 0;
+    int aux;
+
+    if(timer >= limitTimer){
+        aux = 0;
+        for(int i = 18; i >= 0; i--){
+            for(int j = 0; j < 20; j++){
+                if(tablero[i][j] == -1){
+                    if(tablero[i +1][j] <= 0) aux++;
+                }
+            }
+        }
+        if (aux == 4){
+            indY++;
+            for(int i = 18; i >= 0; i--){
+                for(int j = 0; j < 20; j++){
+                    if(tablero[i][j] == -1){
+                        tablero[i][j] = 0;
+                        tablero[i+1][j] = -1;
+                    }
+                }
+            }
+            aux = 0;
+            for(int i = 18; i >= 0; i--){
+                for(int j = 0; j < 20; j++){
+                    if(tablero[i][j] == -1){
+                        if(tablero[i +1][j] <= 0) aux++;
+                    }
+                }
+            }
+            if (aux != 4){
+                for(int i = 19; i >= 0; i--){
+                    for(int j = 0; j < 20; j++){
+                        if(tablero[i][j] == -1) tablero[i][j] = indColorNewPieza;
+                    }        
+                }
+                limit = 1;
+            }
+
+        }else{
+            limit = 1;
+        }
+        timer = 0;
+    }
+    timer++;
+    return limit;
 }
 
 void Campo::ActColoresTablero()

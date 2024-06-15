@@ -86,6 +86,7 @@ void Juego::pollEventos(){
 void Juego::actualizar(){
     this->pollEventos();
     campo.ActColoresTablero();
+    campo.ActTablero();
 }
 
 void Juego::renderizar(){

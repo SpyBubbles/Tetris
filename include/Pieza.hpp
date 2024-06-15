@@ -11,7 +11,7 @@ private:
 public:
     Piezas();
     vector<vector<bool>> ConsultaPieza(int ind);
-    void RotarPz(int ind);    // rotar pieza
+    void RotarPz(int ind);    // Rotar pieza
     void DesrotarPz(int ind); // En caso de que no pueda rotar
 
 };
