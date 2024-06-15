@@ -19,6 +19,7 @@ class Juego
     sf::Event ev;
     int right;
     int left;
+    int up;
 
     void iniciaVariables();
     void iniciaVentana();
@@ -88,6 +89,12 @@ void Juego::pollEventos(){
 
 void Juego::actualizar(){
     this->pollEventos();
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&!up) campo.RotarPieza();
+    else if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))){
+        up = 0;
+    }
+
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) campo.ActLimitTimer(5);
     else{
         campo.ActLimitTimer(30);

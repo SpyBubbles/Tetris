@@ -31,6 +31,7 @@ public:
     bool ActTablero();
     void ActColoresTablero();                                       // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
     void ActLimitTimer(int l); 
+    void RotarPieza();
     void Right();
     void Left();
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
@@ -195,6 +196,36 @@ void Campo::ActColoresTablero()
 
 void Campo::ActLimitTimer(int l){
     limitTimer = l;
+}
+
+void Campo::RotarPieza(){
+    piezas.RotarPz(indNewPieza);
+    vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza);
+    int tam = (int)pieza.size();
+    for(int i = 0; i < tam; i++){
+        for(int j = 0; j < tam; j++){
+            if(pieza[i][j]){
+                if(indY + i < 0 || indY + i >= 20 || indX + j < 0 || indX + j >= 10 || tablero[indY+1][indX+j] > 0){
+                    piezas.DesrotarPz(indNewPieza);
+                    return;
+                }
+            }
+        }
+    }
+
+    for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 10; j++){
+            if(tablero[i][j] == -1) tablero[i][j] = 0;
+        }
+    }
+
+    for(int i = 0; i < tam; i++){
+        for(int j = 0; j < tam; j++){
+            if(pieza[i][j]){
+                tablero[i+indY][j+indX] = -1;
+            }
+        }
+    }
 }
 
 void Campo::Right(){
