@@ -17,6 +17,8 @@ class Juego
     int heigt = 400;
     int width = 400;
     sf::Event ev;
+    int right;
+    int left;
 
     void iniciaVariables();
     void iniciaVentana();
@@ -42,6 +44,8 @@ void Juego::iniciaVentana(){
     this->window = new sf::RenderWindow(sf::VideoMode(this->width,this->heigt),"TETRIS",sf::Style::Titlebar | sf::Style::Close );
     this->window->setFramerateLimit(60); // Sin este ajuste, las piezas bajan extremadamente rápido
     campo.InstalarPieza();
+    this->right = 0;
+    this->left = 0;
 }
 
 // Constructor y Destructor
@@ -87,6 +91,26 @@ void Juego::actualizar(){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) campo.ActLimitTimer(5);
     else{
         campo.ActLimitTimer(30);
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&&!right){
+        campo.Right();
+        right = 1;
+    }else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        right = 0;
+    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&&right){
+        right++;
+        if (right == 6) right = 0;
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&!left){
+        campo.Left();
+        left = 1;
+    }else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+        left = 0;
+    }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&left){
+        left++;
+        if (left == 6) left = 0;
     }
 
     if(campo.ActTablero()){
