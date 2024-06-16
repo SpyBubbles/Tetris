@@ -35,7 +35,6 @@ public:
     void Right();
     void Left();
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
-    int Linea(); //En caso de hacer una linea horizontalmente
 };
 
 // Funciones
@@ -270,25 +269,6 @@ void Campo::Left(){
         }        
     }
 }
-
-int Campo::Linea(){
-    int aux;
-    int lineas;
-
-    for(int i = 19; i >= 0; i--){
-        aux = 0;
-        for(int j = 0; j < 10; j++){
-            if(tablero[i][j] > 0) aux++;
-            if(lineas > 0) tablero[i+lineas][j] = tablero[i][j],tablero[i][j] = 0;
-        }
-        if(aux == 10){
-            for(int j = 0;j < 10; j++) tablero[i][j] = 0;
-            lineas++;
-        }
-    }
-    return lineas;
-}
-
 
 void Campo::draw(sf::RenderTarget &rt, sf::RenderStates rs) const
 {
