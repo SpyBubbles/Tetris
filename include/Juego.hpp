@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <Campo.hpp>
+#include <fstream>
 
 class Juego
 {
@@ -20,6 +21,8 @@ class Juego
     int right;
     int left;
     int up;
+    int score;
+    int maxScore;
 
     void iniciaVariables();
     void iniciaVentana();
@@ -122,11 +125,24 @@ void Juego::actualizar(){
 
     if(campo.ActTablero()){
         if(!campo.InstalarPieza()){
-            cout << "Game Over" << endl;
-            this->window->close();
+            if (score > maxScore){
+                cout << "New Score" << endl;
+                std::ofstream out("assets/maxScore/maxScore.txt");
+                out << score;
+            }else{
+                cout << "Game Over" << endl;
+                this->window->close();
+            }
+            
         }
     }
     campo.ActColoresTablero();
+    int newScore = campo.Linea();
+    score+=newScore;
+    cout << score << endl;
+
+    std::ifstream in("assets/maxScore/maxScore.txt");
+    in >> maxScore;
 }
 
 void Juego::renderizar(){
