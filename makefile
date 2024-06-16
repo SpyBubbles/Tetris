@@ -1,7 +1,6 @@
 # Directorios de origen y destino
 SRC_DIR := src
 BIN_DIR := bin
-MAC := -L/usr/local/lib -I/usr/local/include
 
 SFML := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lbox2d
 

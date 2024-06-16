@@ -90,8 +90,8 @@ void Juego::pollEventos(){
 void Juego::actualizar(){
     this->pollEventos();
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&!up) campo.RotarPieza();
-    else if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&!up) campo.RotarPieza(), up = 1;
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
         up = 0;
     }
 
