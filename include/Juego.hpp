@@ -127,6 +127,7 @@ void Juego::actualizar(){
         }
     }
         campo.ActColoresTablero();
+        campo.Linea();
 }
 
 
