@@ -32,40 +32,40 @@ InterfazUsuario::InterfazUsuario(){
     }
     scoreTextTitle.setFont(font);
     scoreTextTitle.setFillColor(sf::Color::White);
-    scoreTextTitle.setPosition(Vector2f(235,25));
+    scoreTextTitle.setPosition(Vector2f(229,25));
     scoreTextTitle.setString("Score");
 
     maxScoreTextTitle.setFont(font);
     maxScoreTextTitle.setFillColor(sf::Color::White);
-    maxScoreTextTitle.setPosition(Vector2f(225,200));
+    maxScoreTextTitle.setPosition(Vector2f(212,150));
     maxScoreTextTitle.setString("Max Score");
     maxScoreTextTitle.setCharacterSize(20);
 
     scoreText.setFont(font);
     scoreText.setFillColor(sf::Color::White);
-    scoreText.setPosition(Vector2f(250,70));
+    scoreText.setPosition(Vector2f(245,70));
 
     maxScoreText.setFont(font);
     maxScoreText.setFillColor(sf::Color::White);
-    maxScoreText.setPosition(Vector2f(265,245));
+    maxScoreText.setPosition(Vector2f(245,185));
 
     textTETRIS.setFont(font);
     textTETRIS.setFillColor(sf::Color::White);
-    textTETRIS.setPosition(Vector2f(260,370));
-    textTETRIS.setString("TETRIS inc.");
-    textTETRIS.setCharacterSize(20);
+    textTETRIS.setPosition(Vector2f(275,370));
+    textTETRIS.setString("TETRIS");
+    textTETRIS.setCharacterSize(10);
 
     gameOverText.setFont(font);
     gameOverText.setFillColor(sf::Color::White);
-    gameOverText.setPosition(Vector2f(8,150));
+    gameOverText.setPosition(Vector2f(10,150));
     gameOverText.setString("Game Over");
-    gameOverText.setCharacterSize(25);
+    gameOverText.setCharacterSize(20);
 
     newScoreText.setFont(font);
     newScoreText.setFillColor(sf::Color::White);
-    newScoreText.setPosition(Vector2f(8,150));
+    newScoreText.setPosition(Vector2f(10,180));
     newScoreText.setString("New Score");
-    newScoreText.setCharacterSize(25);
+    newScoreText.setCharacterSize(20);
 }
 
 void InterfazUsuario::SetScore(int x){
@@ -96,7 +96,7 @@ void InterfazUsuario::draw(sf::RenderTarget &rt ,sf::RenderStates rs) const{
     rt.draw(scoreTextTitle,rs);
     rt.draw(scoreText,rs);
     rt.draw(maxScoreText,rs);
-    rt.draw(scoreTextTitle,rs);
+    rt.draw(maxScoreTextTitle,rs);
     rt.draw(textTETRIS,rs);
     if(gameOver)rt.draw(gameOverText,rs);
     if(newScore)rt.draw(newScoreText,rs);

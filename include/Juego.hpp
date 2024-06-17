@@ -25,7 +25,7 @@ private:
     int up;
     int score = 0;
     int maxScore = 0;
-    bool vida = 0; //------
+    bool vida = 1; //------
 
     void iniciaVariables();
     void iniciaVentana();
@@ -51,6 +51,7 @@ void Juego::iniciaVariables()
     in >> maxScore;
     interfazUsuario.SetMaxScore(maxScore); //------
     interfazUsuario.SetScore(score); //--------
+
 };
 
 void Juego::iniciaVentana()
