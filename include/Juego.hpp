@@ -6,14 +6,16 @@
 #include <SFML/Network.hpp>
 #include <Campo.hpp>
 #include <fstream>
-#include <InterfazUsuario.hpp> //------
+#include <InterfazUsuario.hpp>
+#include <Sonidos.hpp>
 
 class Juego
 {
 private:
     // Variables
     Campo campo;
-    InterfazUsuario interfazUsuario; //-----
+    InterfazUsuario interfazUsuario;
+    Sonidos sonido;
 
     // Ventana
     sf::RenderWindow *window;
@@ -25,7 +27,7 @@ private:
     int up;
     int score = 0;
     int maxScore = 0;
-    bool vida = 1; //------
+    bool vida = 1;
 
     void iniciaVariables();
     void iniciaVentana();
@@ -49,10 +51,9 @@ void Juego::iniciaVariables()
     this->window = nullptr;
     ifstream in("assets/maxScore/maxScore.txt");
     in >> maxScore;
-    interfazUsuario.SetMaxScore(maxScore); //------
-    interfazUsuario.SetScore(score); //--------
-
-};
+    interfazUsuario.SetMaxScore(maxScore); 
+    interfazUsuario.SetScore(score); 
+}; 
 
 void Juego::iniciaVentana()
 {
@@ -68,6 +69,7 @@ Juego::Juego()
 {
     this->iniciaVariables();
     this->iniciaVentana();
+    sonido.PlayMusic();
 }
 
 Juego::~Juego()
@@ -165,18 +167,21 @@ void Juego::actualizar()
         {
             if (!campo.InstalarPieza())
             {
-                vida = 0; //------
+                vida = 0;
+                sonido.PauseMusic();
                 if (score > maxScore)
                 {
                     //cout << "New Score" << endl; -------
                     interfazUsuario.NewScore(); //------
-                    ofstream out("maxScore.txt");
+                    ofstream out("assets/maxScore/maxScore.txt");
                     out << score;
+                    sonido.PlayNewScore();
                 }
                 else
                 {
                     //cout << "Game Over" << endl; -------
-                    interfazUsuario.GameOver(); //-------
+                    interfazUsuario.GameOver();
+                    sonido.PlayGameOver();
                 }
                 //this window close
             }
@@ -184,7 +189,8 @@ void Juego::actualizar()
         campo.ActColoresTablero();
         int newScore = campo.Linea() * 1;
         score += newScore;
-        interfazUsuario.SetScore(score); //------
+        interfazUsuario.SetScore(score);
+        if(newScore > 0) sonido.PlayLine();
     } //-------
 }
 
