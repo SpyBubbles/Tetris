@@ -103,9 +103,9 @@ class Sonidos {
     + PlayNewScore() : void
 }
 
-Juego *-- Campo: campo 
-Juego *-- InterfazUsuario: interfazUsuario 
-Juego *-- Sonidos: sonido 
-Campo *-- Piezas: piezas
+Juego "1" *-- "1" Campo: campo 
+Juego "1" *-- "1" InterfazUsuario: interfazUsuario 
+Juego "1" *-- "4" Sonidos: sonido 
+Campo "1" *-- "*" Piezas: piezas
 
 @enduml

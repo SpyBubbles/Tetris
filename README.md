@@ -5,24 +5,22 @@
 * Saber aplicar el conpceto de abstracción y relacionar los objetos del videojuego entre ellos
 
 ### Descripción del Proyecto
-Tetris es un juego de lógica con fecha de estreno en el año de 1989, el cual consiste en en rompecabezas compuesto de tetrominiós, piezas compuestas de cuatro secciones las cuales deberán que maniobrarse en el campo a partír de rotaciones y movimientos laterales con el fin de liberar espacio al fondo del tbalero, teniendo como objetivo principal que el campo no se llene de tetrominiós.
+Tetris es un juego de lógica con fecha de estreno en el año de 1989, el cual consiste en en rompecabezas compuesto de tetrominiós, piezas compuestas de cuatro secciones las cuales deberán que maniobrarse en el campo a partír de rotaciones y movimientos laterales con el fin de liberar espacio al fondo del tbalero, teniendo como objetivo principal que el campo no se llene de tetrominiós. Para el desarrollo de este juego se regirápor un sistema de puntos que dependen ddel numero de lineas hechas por el jugador, de este modo tambien existe el registro de un record, ¿serás capaz de romperlo?
 
 ### Clases Usadas
 * Juego
-* Jugador
-* P_C
-* P_I
-* P_T
-* P_L
-* P_J
-* P_S
-* P_Z
-* Puntaje
-* NumeroLineas
-* Limite
-* ObjetoDestructible
-* ObjetoIndestructible
-* Coordenada
+* Campo
+* Pieza
+* InterfazUsuario
+* Refsh
+* Sonidos
 
 ### Repositorios Usados
-[FTXUI](https://github.com/ArthurSonzogni/FTXUI)
+[SFML](https://github.com/SFML/SFML)
+
+### Controles
+* Rotar pieza -> up
+* Bajar pieza lentamente -> down
+* Hard Drop -> Space
+* Mover Izquierda -> left
+* Mover Derecha-> right
