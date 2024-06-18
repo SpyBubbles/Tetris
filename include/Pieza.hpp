@@ -60,7 +60,7 @@ Piezas::Piezas()
 
 vector<vector<bool>> Piezas::ConsultaPieza(int ind)
 {
-    return piezas[ind];
+    return piezas[ind]; //Retorna una pieza
 }
 
 void Piezas::RotarPz(int ind)
@@ -80,7 +80,7 @@ void Piezas::RotarPz(int ind)
         indJ = 0;
     }
 }
-void Piezas::DesrotarPz(int ind)
+void Piezas::DesrotarPz(int ind) //En caso de que una pieza no se pueda rotar por su posicion
 {
     vector<vector<bool>> vAux = piezas[ind];
     int indI = 0;

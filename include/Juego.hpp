@@ -19,7 +19,7 @@ private:
 
     // Ventana
     sf::RenderWindow *window;
-    int heigt = 400;
+    int heigt = 400; //Medidas de la ventana
     int width = 400;
     sf::Event ev;
     int right;
@@ -49,8 +49,8 @@ public:
 void Juego::iniciaVariables()
 {
     this->window = nullptr;
-    ifstream in("assets/maxScore/maxScore.txt");
-    in >> maxScore;
+    ifstream in("assets/maxScore/maxScore.txt"); //Recibir el max score del txt
+    in >> maxScore; 
     interfazUsuario.SetMaxScore(maxScore); 
     interfazUsuario.SetScore(score); 
 }; 
@@ -59,7 +59,7 @@ void Juego::iniciaVentana()
 {
     this->window = new sf::RenderWindow(sf::VideoMode(this->width, this->heigt), "TETRIS", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60); // Sin este ajuste, las piezas bajan extremadamente rápido
-    campo.InstalarPieza();
+    campo.InstalarPieza(); //Ingresar las piezas al campo
     this->right = 0;
     this->left = 0;
 }
@@ -69,7 +69,7 @@ Juego::Juego()
 {
     this->iniciaVariables();
     this->iniciaVentana();
-    sonido.PlayMusic();
+    sonido.PlayMusic(); //Hacer que suene la musica del juego 
 }
 
 Juego::~Juego()
@@ -114,24 +114,27 @@ void Juego::actualizar()
 {
     this->pollEventos();
 
-    if (vida) //-------
-    { //-------
+    if (vida) //Mientras se tenga vida
+    { 
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !up)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !up) //Si se presiona tecla up se rota la pieza
             campo.RotarPieza(), up = 1;
         else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             up = 0;
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            campo.ActLimitTimer(5);
-        else
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //Si se presiona down baja la pieza
+            campo.ActLimitTimer(5); //Velocidad de la tecla down
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) //Si se presiona espacio se hace "Hard drop"
         {
-            campo.ActLimitTimer(30);
+            campo.ActLimitTimer(1); //Velocidad de la pieza presionando space
+        } else {
+            campo.ActLimitTimer(30); //Velocidad a la que baja normalmente
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !right)
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !right) //Se mueve a la derecha la pieza
         {
             campo.Right();
             right = 1;
@@ -147,7 +150,7 @@ void Juego::actualizar()
                 right = 0;
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !left)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !left) //Se mueve a izquierda la pieza
         {
             campo.Left();
             left = 1;
@@ -163,35 +166,32 @@ void Juego::actualizar()
                 left = 0;
         }
 
-        if (campo.ActTablero())
+        if (campo.ActTablero()) //Si tablero es true
         {
-            if (!campo.InstalarPieza())
+            if (!campo.InstalarPieza()) //Si ya no pueden agreegarse piezas
             {
                 vida = 0;
-                sonido.PauseMusic();
-                if (score > maxScore)
+                sonido.PauseMusic(); //Se pausa la musica del juego
+                if (score > maxScore) //En caso de que la socre sea mayor a la maxima score
                 {
-                    //cout << "New Score" << endl; -------
-                    interfazUsuario.NewScore(); //------
-                    ofstream out("assets/maxScore/maxScore.txt");
+                    interfazUsuario.NewScore(); 
+                    ofstream out("assets/maxScore/maxScore.txt"); //Se guarda la nueva max score
                     out << score;
-                    sonido.PlayNewScore();
+                    sonido.PlayNewScore(); //Sonido en caso de una nueva max score
                 }
                 else
                 {
-                    //cout << "Game Over" << endl; -------
                     interfazUsuario.GameOver();
-                    sonido.PlayGameOver();
+                    sonido.PlayGameOver(); //Musica de game over
                 }
-                //this window close
             }
         }
         campo.ActColoresTablero();
-        int newScore = campo.Linea() * 1;
+        int newScore = campo.Linea() * 1; //Agregar a la socre cada vez que se haga una linea
         score += newScore;
         interfazUsuario.SetScore(score);
         if(newScore > 0) sonido.PlayLine();
-    } //-------
+    }
 }
 
 void Juego::renderizar()
@@ -204,6 +204,6 @@ void Juego::renderizar()
 
     this->window->draw(campo);
     // Dibujar los objetos del Juego
-    this->window->draw(interfazUsuario); //-------
+    this->window->draw(interfazUsuario);
     this->window->display();
 }

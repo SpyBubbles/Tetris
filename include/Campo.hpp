@@ -62,12 +62,12 @@ Campo::Campo()
 
 bool Campo::InstalarPieza()
 {
-    srand(time(NULL));
-    indNewPieza = rand()%7;
-    vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza);
+    srand(time(NULL)); //Inicializa para generar un numero aleatorio
+    indNewPieza = rand()%7; //Genera un numero aleaotrio
+    vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza); //Elige una pieza
 
     int tam = (int)pieza.size();
-    indY = 0;
+    indY = 0; //Agregamos puntos iniciales donde queremos que se genere la pieza
     indX = 5 - tam / 2;
 
     for (int i = 0; i < tam; i++)
@@ -76,13 +76,13 @@ bool Campo::InstalarPieza()
         {
             if (pieza[i][j])
             {
-                if (tablero[i][j + indX] > 0) return false;
+                if (tablero[i][j + indX] > 0) return false; //NO s epuede instala mas piezas en el campo
                     tablero[i][j + indX] = -1;
             }
         }
     }
 
-    int color = 1 + rand()%7;
+    int color = 1 + rand()%7; //Se selecciona una valor al azar para dar color a la pieza
     indColorNewPieza = color;
 
     switch(color){
@@ -119,7 +119,7 @@ bool Campo::InstalarPieza()
 
 bool Campo::ActTablero(){
     bool limit = 0;
-    int aux;
+    int aux; //Cuantas celdas estan vacias por debajo para poner piezas
 
     if(timer >= limitTimer){
         aux = 0;
@@ -130,7 +130,7 @@ bool Campo::ActTablero(){
                 }
             }
         }
-        if (aux == 4){
+        if (aux == 4){ //Si son 4 celdas las que estan vacias se puede poner la pieza
             indY++;
             for(int i = 18; i >= 0; i--){
                 for(int j = 0; j < 10; j++){
@@ -199,7 +199,7 @@ void Campo::ActLimitTimer(int l){
     limitTimer = l;
 }
 
-void Campo::RotarPieza(){
+void Campo::RotarPieza(){ //Rotar pieza
     piezas.RotarPz(indNewPieza);
     vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza);
     int tam = (int)pieza.size();
@@ -207,7 +207,7 @@ void Campo::RotarPieza(){
         for(int j = 0; j < tam; j++){
             if(pieza[i][j]){
                 if(indY + i < 0 || indY + i >= 20 || indX + j < 0 || indX + j >= 10 || tablero[indY+1][indX+j] > 0){
-                    piezas.DesrotarPz(indNewPieza);
+                    piezas.DesrotarPz(indNewPieza); //Rotacion imposible
                     return;
                 }
             }
@@ -229,7 +229,7 @@ void Campo::RotarPieza(){
     }
 }
 
-void Campo::Right(){
+void Campo::Right(){ //Mover a la izquierda la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 10; j++){
@@ -240,7 +240,7 @@ void Campo::Right(){
             }
         }
     }
-    if (aux == 4){
+    if (aux == 4){ //Si tiene espacio para maniobrar
         indX++;
         for(int i = 0; i < 20; i++){
             for(int j = 9; j >= 0; j--){
@@ -250,7 +250,7 @@ void Campo::Right(){
     }
 }
 
-void Campo::Left(){
+void Campo::Left(){ //Mover a la derecha la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 1; j < 10; j++){
@@ -261,7 +261,7 @@ void Campo::Left(){
             }
         }
     }
-    if (aux == 4){
+    if (aux == 4){ //Si tiene espacio para maniobrar
         indX--;
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 10; j++){
@@ -271,7 +271,7 @@ void Campo::Left(){
     }
 }
 
-int Campo::Linea(){
+int Campo::Linea(){ //Funcion para llevar a cabo la deteccion y eliminacion de una linea
     int aux = 0;
     int lineas = 0;
 
