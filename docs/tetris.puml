@@ -1,62 +1,111 @@
 @startuml Tetris
 
-class Juego{
-    + IniciarJuego()
-}
-class Jugador
+class Campo {
+    - piezas : Piezas
+    - indNewPieza : int
+    - indColorNewPieza : int
+    - newPiezaColor : sf::Color
+    - indX : int
+    - indY : int
+    - timer : int
+    - limitTimer : int
+    - tablero : int[][]
+    - formaTablero : sf::RectangleShape[][]
 
-class Campo
-class Pieza{
-    + RotarIzquierda()
-    + RotarDerecha()
-    + MoverLateral()
-    + BajarPieza()
-}
-class P_C
-class P_I
-class P_T
-class P_L
-class P_J
-class P_S
-class P_Z
-class Puntaje{
-    + IncrementarPuntaje()
-    + ObtenerPuntaje()
-}
-class Nivel{
-    + IncrementarNivel
-}
-class NumeroLinea{
-    + IncrementarNumero()
-    + ObtenerLineas()
-}
-class Limite
-class ObjetoDestruible
-class ObjetoIndestructible
-class Coordenada{
-    - CoordenadaX
-    - CoordenadaY
+    + Campo()
+    + InstalarPieza() : bool
+    + ActTablero() : bool
+    + ActColoresTablero() : void
+    + ActLimitTimer(l : int) : void
+    + RotarPieza() : void
+    + Right() : void
+    + Left() : void
+    + draw(rt : sf::RenderTarget &, rs : sf::RenderStates) const : void
+    + Linea() : int
 }
 
-Juego "1" *-- "1" Jugador
-Jugador "1" o-- "1" Campo
-Jugador "1" *-- "1" Puntaje
-Jugador "1" o-- "7" Pieza
-Campo "1" *-- "*" Nivel
-Campo "1" *-- "*" Pieza
-Campo "1" *-- "*" Linea
-Campo "1" *-- "1" Limite
-NumeroLinea "10" --|> "1" Nivel 
+class InterfazUsuario {
+    - font : Font
+    - scoreText : Text
+    - scoreTextTitle : Text
+    - maxScoreTextTitle : Text
+    - maxScoreText : Text
+    - gameOverText : Text
+    - textTETRIS : Text
+    - newScoreText : Text
+    - newScore : bool
+    - gameOver : bool
 
-Campo --|> ObjetoIndestructible
-Pieza --|> ObjetoDestruible
-P_C --|> Pieza
-P_I --|> Pieza
-P_T --|> Pieza
-P_Lr --|> Pieza
-P_Ll --|> Pieza
-P_Sr --|> Pieza
-P_Sl --|> Pieza
-Pieza *-- Coordenada
+    + InterfazUsuario()
+    + SetMaxScore(int) : void
+    + SetScore(int) : void
+    + GameOver() : void
+    + NewScore() : void
+    + draw(RenderTarget&, RenderStates) const : void
+
+}
+
+class Juego {
+    - campo : Campo
+    - interfazUsuario : InterfazUsuario
+    - sonido : Sonidos
+    - window : sf::RenderWindow*
+    - heigt : int
+    - width : int
+    - ev : sf::Event
+    - right : int
+    - left : int
+    - up : int
+    - score : int
+    - maxScore : int
+    - vida : bool
+
+    + Juego()
+    + ~Juego()
+    + Running() : bool
+    + pollEventos() : void
+    + actualizar() : void
+    + renderizar() : void
+
+    - iniciaVariables() : void
+    - iniciaVentana() : void
+}
+
+class Piezas {
+    - piezas : vector<vector<vector<bool>>>
+
+    + Piezas()
+    + ConsultaPieza(int) : vector<vector<bool>>
+    + RotarPz(int) : void
+    + DesrotarPz(int) : void
+}
+
+class Refresh {
+    + Refresh()
+    + virtual Actualizar() : void = 0
+    + ~Refresh()
+}
+
+class Sonidos {
+    - musica : Music
+    - lineaSonido : Sound
+    - nuevoRecordSonido : Sound
+    - gameOverSonido : Sound
+    - lineaBuffer : SoundBuffer
+    - nuevoRecordBuffer : SoundBuffer
+    - gameOverBuffer : SoundBuffer
+
+    + Sonidos()
+    + PlayMusic() : void
+    + PauseMusic() : void
+    + PlayLine() : void
+    + PlayGameOver() : void
+    + PlayNewScore() : void
+}
+
+Juego *-- Campo: campo 
+Juego *-- InterfazUsuario: interfazUsuario 
+Juego *-- Sonidos: sonido 
+Campo *-- Piezas: piezas
 
 @enduml
