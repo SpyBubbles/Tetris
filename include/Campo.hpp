@@ -64,7 +64,7 @@ bool Campo::instalarPieza()
 {
     srand(time(NULL)); //Inicializa para generar un numero aleatorio
     indNewPieza = rand()%7; //Genera un numero aleaotrio
-    vector<vector<bool>> pieza = block.consultaPieza(indNewPieza); //Elige una pieza
+    vector<vector<bool>> pieza = block.consultarPieza(indNewPieza); //Elige una pieza
 
     int tam = (int)pieza.size();
     indY = 0; //Agregamos puntos iniciales donde queremos que se genere la pieza
@@ -201,7 +201,7 @@ void Campo::actLimitTimer(int l){
 
 void Campo::rotarPieza(){ //Rotar pieza
     block.rotarPieza(indNewPieza);
-    vector<vector<bool>> pieza = block.consultaPieza(indNewPieza);
+    vector<vector<bool>> pieza = block.consultarPieza(indNewPieza);
     int tam = (int)pieza.size();
     for(int i = 0; i < tam; i++){
         for(int j = 0; j < tam; j++){

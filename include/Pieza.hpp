@@ -10,7 +10,7 @@ private:
 
 public:
     Pieza();
-    vector<vector<bool>> consultaPieza(int ind);
+    vector<vector<bool>> consultarPieza(int ind);
     void rotarPieza(int ind);    // Rotar pieza
     void desrotarPieza(int ind); // En caso de que no pueda rotar
 
@@ -58,7 +58,7 @@ Pieza::Pieza()
               {0, 0, 0, 0, 0}}};
 }
 
-vector<vector<bool>> Pieza::consultaPieza(int ind)
+vector<vector<bool>> Pieza::consultarPieza(int ind)
 {
     return pieza[ind]; //Retorna una pieza
 }

@@ -51,8 +51,8 @@ void Juego::iniciarVariables()
     this->window = nullptr;
     ifstream in("assets/maxScore/maxScore.txt"); //Recibir el max score del txt
     in >> maxScore; 
-    interfazUsuario.SetMaxScore(maxScore); 
-    interfazUsuario.SetScore(score); 
+    interfazUsuario.setMaxScore(maxScore); 
+    interfazUsuario.setScore(score); 
 }; 
 
 void Juego::iniciarVentana()
@@ -174,14 +174,14 @@ void Juego::actualizar()
                 sonido.pauseMusic(); //Se pausa la musica del juego
                 if (score > maxScore) //En caso de que la socre sea mayor a la maxima score
                 {
-                    interfazUsuario.NewScore(); 
+                    interfazUsuario.newScoreFunction(); 
                     ofstream out("assets/maxScore/maxScore.txt"); //Se guarda la nueva max score
                     out << score;
                     sonido.playNewScore(); //Sonido en caso de una nueva max score
                 }
                 else
                 {
-                    interfazUsuario.GameOver();
+                    interfazUsuario.gameOverFunction();
                     sonido.playGameOver(); //Musica de game over
                 }
             }
@@ -189,7 +189,7 @@ void Juego::actualizar()
         campo.actColoresTablero();
         int newScore = campo.linea() * 1; //Agregar a la socre cada vez que se haga una linea
         score += newScore;
-        interfazUsuario.SetScore(score);
+        interfazUsuario.setScore(score);
         if(newScore > 0) sonido.playLine();
     }
 }
