@@ -4,7 +4,7 @@
 using namespace std;
 using namespace sf;
 
-class Sonidos{
+class Sonido{
     private:
         Music musica;
         Sound lineaSonido;
@@ -14,15 +14,15 @@ class Sonidos{
         SoundBuffer nuevoRecordBuffer;
         SoundBuffer gameOverBuffer;
     public:
-        Sonidos();
-        void PlayMusic();
-        void PauseMusic();
-        void PlayLine();
-        void PlayGameOver();
-        void PlayNewScore();
+        Sonido();
+        void playMusic();
+        void pauseMusic();
+        void playLine();
+        void playGameOver();
+        void playNewScore();
 };
 
-Sonidos::Sonidos(){
+Sonido::Sonido(){
     // Asegúrate de que la ruta relativa a los archivos .ogg sea correcta
     musica.openFromFile("assets/musica/music.ogg");
     musica.setLoop(true);
@@ -45,21 +45,21 @@ Sonidos::Sonidos(){
     gameOverSonido.setBuffer(gameOverBuffer);
 }
 
-void Sonidos::PlayMusic(){
+void Sonido::playMusic(){
     musica.play();
 }
 
-void Sonidos::PauseMusic(){
+void Sonido::pauseMusic(){
     musica.pause();
 }
 
-void Sonidos::PlayLine(){
+void Sonido::playLine(){
     lineaSonido.play();
 }
 
-void Sonidos::PlayNewScore(){
+void Sonido::playNewScore(){
     nuevoRecordSonido.play();
 }
-void Sonidos::PlayGameOver(){
+void Sonido::playGameOver(){
     gameOverSonido.play();
 }
