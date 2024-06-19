@@ -34,3 +34,7 @@ Tetris es un juego de lógica con fecha de estreno en el año de 1989, el cual c
 * En la terminal escribir "make"
 * Después, escribir "make runmain"
 * Disfruta
+
+### Nombres
+
+### Video
