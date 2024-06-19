@@ -3,22 +3,22 @@
 
 using namespace std;
 
-class Piezas
+class Pieza
 {
 private:
-    vector<vector<vector<bool>>> piezas;
+    vector<vector<vector<bool>>> pieza;
 
 public:
-    Piezas();
-    vector<vector<bool>> ConsultaPieza(int ind);
-    void RotarPz(int ind);    // Rotar pieza
-    void DesrotarPz(int ind); // En caso de que no pueda rotar
+    Pieza();
+    vector<vector<bool>> consultaPieza(int ind);
+    void rotarPieza(int ind);    // Rotar pieza
+    void desrotarPieza(int ind); // En caso de que no pueda rotar
 
 };
 
-Piezas::Piezas()
+Pieza::Pieza()
 {
-    piezas = {{{1, 1},
+    pieza = {{{1, 1},
               {1, 1}}, // Cuadrado
 
              {{0, 0, 0, 0, 0}, // S
@@ -58,39 +58,39 @@ Piezas::Piezas()
               {0, 0, 0, 0, 0}}};
 }
 
-vector<vector<bool>> Piezas::ConsultaPieza(int ind)
+vector<vector<bool>> Pieza::consultaPieza(int ind)
 {
-    return piezas[ind]; //Retorna una pieza
+    return pieza[ind]; //Retorna una pieza
 }
 
-void Piezas::RotarPz(int ind)
+void Pieza::rotarPieza(int ind)
 {
-    vector<vector<bool>> vAux = piezas[ind]; // replica de pieza
+    vector<vector<bool>> vAux = pieza[ind]; // replica de pieza
     int indI = 0;
     int indJ = 0;
-    int tam = (int)piezas[ind].size();
+    int tam = (int)pieza[ind].size();
     for (int i = 0; i < tam; i++)
     {
         for (int j = tam-1; j >= 0; j--)
         {
-            piezas[ind][indI][indJ] = vAux[j][i];
+            pieza[ind][indI][indJ] = vAux[j][i];
             indJ++;
         }
         indI++;
         indJ = 0;
     }
 }
-void Piezas::DesrotarPz(int ind) //En caso de que una pieza no se pueda rotar por su posicion
+void Pieza::desrotarPieza(int ind) //En caso de que una pieza no se pueda rotar por su posicion
 {
-    vector<vector<bool>> vAux = piezas[ind];
+    vector<vector<bool>> vAux = pieza[ind];
     int indI = 0;
     int indJ = 0;
-    int tam = (int)piezas[ind].size();
+    int tam = (int)pieza[ind].size();
     for (int i = tam - 1; i >= 0; i--)
     {
         for (int j = 0; i < tam; j++)
         {
-            piezas[ind][indI][indJ] = vAux[j][i];
+            pieza[ind][indI][indJ] = vAux[j][i];
             indJ++;
         }
         indI++;

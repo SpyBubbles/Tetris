@@ -13,7 +13,7 @@
 class Campo : public sf::Drawable
 { // La clase Campo hereda de sf::Drawable para poder ser dibujada en una ventana de SFML
 private:
-    Piezas piezas;
+    Pieza block;
     int indNewPieza, indColorNewPieza;
     sf::Color newPiezaColor;
 
@@ -27,15 +27,15 @@ private:
 
 public:
     Campo();
-    bool InstalarPieza();
-    bool ActTablero();
-    void ActColoresTablero();                                       // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
-    void ActLimitTimer(int l); 
-    void RotarPieza();
-    void Right();
-    void Left();
+    bool instalarPieza();
+    bool actTablero();
+    void actColoresTablero();                                       // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
+    void actLimitTimer(int l); 
+    void rotarPieza();
+    void right();
+    void left();
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
-    int Linea();
+    int linea();
 };
 
 // Funciones
@@ -60,11 +60,11 @@ Campo::Campo()
 
 }
 
-bool Campo::InstalarPieza()
+bool Campo::instalarPieza()
 {
     srand(time(NULL)); //Inicializa para generar un numero aleatorio
     indNewPieza = rand()%7; //Genera un numero aleaotrio
-    vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza); //Elige una pieza
+    vector<vector<bool>> pieza = block.consultaPieza(indNewPieza); //Elige una pieza
 
     int tam = (int)pieza.size();
     indY = 0; //Agregamos puntos iniciales donde queremos que se genere la pieza
@@ -117,7 +117,7 @@ bool Campo::InstalarPieza()
     return true;
 }
 
-bool Campo::ActTablero(){
+bool Campo::actTablero(){
     bool limit = 0;
     int aux; //Cuantas celdas estan vacias por debajo para poner piezas
 
@@ -154,7 +154,7 @@ bool Campo::ActTablero(){
     return limit;
 }
 
-void Campo::ActColoresTablero()
+void Campo::actColoresTablero()
 { // Actualiza los colores de las celdas del tablero
     for (int i = 0; i < 20; i++)
     {
@@ -195,19 +195,19 @@ void Campo::ActColoresTablero()
     }
 }
 
-void Campo::ActLimitTimer(int l){
+void Campo::actLimitTimer(int l){
     limitTimer = l;
 }
 
-void Campo::RotarPieza(){ //Rotar pieza
-    piezas.RotarPz(indNewPieza);
-    vector<vector<bool>> pieza = piezas.ConsultaPieza(indNewPieza);
+void Campo::rotarPieza(){ //Rotar pieza
+    block.rotarPieza(indNewPieza);
+    vector<vector<bool>> pieza = block.consultaPieza(indNewPieza);
     int tam = (int)pieza.size();
     for(int i = 0; i < tam; i++){
         for(int j = 0; j < tam; j++){
             if(pieza[i][j]){
                 if(indY + i < 0 || indY + i >= 20 || indX + j < 0 || indX + j >= 10 || tablero[indY+1][indX+j] > 0){
-                    piezas.DesrotarPz(indNewPieza); //Rotacion imposible
+                    block.desrotarPieza(indNewPieza); //Rotacion imposible
                     return;
                 }
             }
@@ -229,7 +229,7 @@ void Campo::RotarPieza(){ //Rotar pieza
     }
 }
 
-void Campo::Right(){ //Mover a la izquierda la pieza
+void Campo::right(){ //Mover a la izquierda la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 10; j++){
@@ -250,7 +250,7 @@ void Campo::Right(){ //Mover a la izquierda la pieza
     }
 }
 
-void Campo::Left(){ //Mover a la derecha la pieza
+void Campo::left(){ //Mover a la derecha la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 1; j < 10; j++){
@@ -271,7 +271,7 @@ void Campo::Left(){ //Mover a la derecha la pieza
     }
 }
 
-int Campo::Linea(){ //Funcion para llevar a cabo la deteccion y eliminacion de una linea
+int Campo::linea(){ //Funcion para llevar a cabo la deteccion y eliminacion de una linea
     int aux = 0;
     int lineas = 0;
 
