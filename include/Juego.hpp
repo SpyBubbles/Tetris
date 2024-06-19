@@ -104,7 +104,7 @@ void Juego::pollEventos()
                 this->window->close();
             }
             break;
-        default:
+            default:
             break;
         }
     }
@@ -132,7 +132,6 @@ void Juego::actualizar()
         } else {
             campo.actLimitTimer(30); //Velocidad a la que baja normalmente
         }
-
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !right) //Se mueve a la derecha la pieza
         {
@@ -171,6 +170,7 @@ void Juego::actualizar()
             if (!campo.instalarPieza()) //Si ya no pueden agreegarse piezas
             {
                 vida = 0;
+                this->window->clear();
                 sonido.pauseMusic(); //Se pausa la musica del juego
                 if (score > maxScore) //En caso de que la socre sea mayor a la maxima score
                 {
