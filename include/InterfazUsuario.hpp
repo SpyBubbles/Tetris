@@ -19,10 +19,10 @@ class InterfazUsuario: public sf::Drawable {
     
     public:
     InterfazUsuario(); //Constructor
-    void setMaxScore(int); //Valor numerico de puntuacion maxima
-    void setScore(int); //Valor numerico de puntuacion
-    void gameOverFunction(); //Texto gam over 
-    void newScoreFunction(); //Tecto new score
+    void SetMaxScore(int); //Valor numerico de puntuacion maxima
+    void SetScore(int); //Valor numerico de puntuacion
+    void GameOverFunction(); //Texto gam over 
+    void NewScoreFunction(); //Tecto new score
     virtual void draw(sf::RenderTarget&,sf::RenderStates) const;
 };
 
@@ -68,7 +68,7 @@ InterfazUsuario::InterfazUsuario(){
     newScoreText.setCharacterSize(20);
 }
 
-void InterfazUsuario::setScore(int x){                  //Funcionalidad de el valor numerico de la puntuacion
+void InterfazUsuario::SetScore(int x){                  //Funcionalidad de el valor numerico de la puntuacion
     if(x<=9) scoreText.setString("000" + to_string(x));
     else if(x<=99) scoreText.setString("00" + to_string(x));
     else if(x<=999) scoreText.setString("000" + to_string(x));
@@ -76,7 +76,7 @@ void InterfazUsuario::setScore(int x){                  //Funcionalidad de el va
     else scoreText.setString("9999");
 }
 
-void InterfazUsuario::setMaxScore(int x){               //Declaracion de el valor numerico de la puntuacion maxima
+void InterfazUsuario::SetMaxScore(int x){               //Declaracion de el valor numerico de la puntuacion maxima
     if(x<=9) maxScoreText.setString("000" + to_string(x));
     else if(x<=99) maxScoreText.setString("00" + to_string(x));
     else if(x<=999) maxScoreText.setString("000" + to_string(x));
@@ -84,11 +84,11 @@ void InterfazUsuario::setMaxScore(int x){               //Declaracion de el valo
     else maxScoreText.setString("9999");
 }
 
-void InterfazUsuario::gameOverFunction(){   //Retornar 1 si es game over
+void InterfazUsuario::GameOverFunction(){   //Retornar 1 si es game over
     gameOver = 1;
 }
 
-void InterfazUsuario::newScoreFunction(){   //Retornar 1 si es new score
+void InterfazUsuario::NewScoreFunction(){   //Retornar 1 si es new score
     newScore = 1;
 }
 

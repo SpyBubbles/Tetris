@@ -13,15 +13,15 @@ class Campo {
     - formaTablero : sf::RectangleShape[][]
 
     + Campo()
-    + instalarPieza() : bool
-    + actTablero() : bool
-    + actColoresTablero() : void
-    + actLimitTimer(l : int) : void
-    + rotarPieza() : void
-    + right() : void
-    + left() : void
+    + InstalarPieza() : bool
+    + ActTablero() : bool
+    + ActColoresTablero() : void
+    + ActLimitTimer(l : int) : void
+    + RotarPieza() : void
+    + Right() : void
+    + Left() : void
     + draw(rt : sf::RenderTarget &, rs : sf::RenderStates) const : void
-    + linea() : int
+    + Linea() : int
 }
 
 class InterfazUsuario {
@@ -37,10 +37,10 @@ class InterfazUsuario {
     - gameOver : bool
 
     + InterfazUsuario()
-    + setMaxScore(int) : void
-    + setScore(int) : void
-    + gameOverFunction() : void
-    + newScoreFunction() : void
+    + SetMaxScore(int) : void
+    + SetScore(int) : void
+    + GameOverFunction() : void
+    + NewScoreFunction() : void
     + draw(RenderTarget&, RenderStates) const : void
 }
 
@@ -62,9 +62,9 @@ class Juego {
     + Juego()
     + ~Juego()
     + Running() : bool
-    + pollEventos() : void
-    + actualizar() : void
-    + renderizar() : void
+    + PollEventos() : void
+    + Actualizar() : void
+    + Renderizar() : void
 
     - iniciarVariables() : void
     - iniciarVentana() : void
@@ -74,9 +74,9 @@ class Pieza {
     - pieza : vector<vector<vector<bool>>>
 
     + Pieza()
-    + consultarPieza(int) : vector<vector<bool>>
-    + rotarPieza(int) : void
-    + desrotarPieza(int) : void
+    + ConsultarPieza(int) : vector<vector<bool>>
+    + RotarPieza(int) : void
+    + DesrotarPieza(int) : void
 }
 
 class Refresh {
@@ -95,11 +95,11 @@ class Sonido {
     - gameOverBuffer : SoundBuffer
 
     + Sonido()
-    + playMusic() : void
-    + pauseMusic() : void
-    + playLine() : void
-    + playGameOver() : void
-    + playNewScore() : void
+    + PlayMusic() : void
+    + PauseMusic() : void
+    + PlayLine() : void
+    + PlayGameOver() : void
+    + PlayNewScore() : void
 }
 
 Juego "1" *-- "1" Campo: campo 
@@ -110,6 +110,6 @@ Campo "1" o-- "1" formaTablero: "sf::RectangleShape"
 Sonido "1" --> "1" Music
 Sonido "1" o-- "*" SoundBuffer: "lineaBuffer, nuevoRecordBuffer, gameOverBuffer"
 InterfazUsuario "1" o-- "1" Font
-InterfazUsuario "1" --> "*" Text
+InterfazUsuario "1" --|> "1" Drawable
 
 @enduml

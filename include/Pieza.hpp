@@ -11,8 +11,8 @@ private:
 public:
     Pieza();
     vector<vector<bool>> consultarPieza(int ind);
-    void rotarPieza(int ind);    // Rotar pieza
-    void desrotarPieza(int ind); // En caso de que no pueda rotar
+    void RotarPieza(int ind);    // Rotar pieza
+    void DesrotarPieza(int ind); // En caso de que no pueda rotar
 
 };
 
@@ -63,7 +63,7 @@ vector<vector<bool>> Pieza::consultarPieza(int ind)
     return pieza[ind]; //Retorna una pieza
 }
 
-void Pieza::rotarPieza(int ind)
+void Pieza::RotarPieza(int ind)
 {
     vector<vector<bool>> vAux = pieza[ind]; // replica de pieza
     int indI = 0;
@@ -80,7 +80,7 @@ void Pieza::rotarPieza(int ind)
         indJ = 0;
     }
 }
-void Pieza::desrotarPieza(int ind) //En caso de que una pieza no se pueda rotar por su posicion
+void Pieza::DesrotarPieza(int ind) //En caso de que una pieza no se pueda rotar por su posicion
 {
     vector<vector<bool>> vAux = pieza[ind];
     int indI = 0;

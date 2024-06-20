@@ -10,10 +10,10 @@ int main(int argc, char const *argv[])
     while (juego.Running()){ // Mientras la ventana este abierta
 
         // Update
-        juego.actualizar();
+        juego.Actualizar();
 
         // Render
-        juego.renderizar();
+        juego.Renderizar();
 
 
     }

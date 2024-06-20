@@ -15,11 +15,11 @@ class Sonido{
         SoundBuffer gameOverBuffer;
     public:
         Sonido();
-        void playMusic();
-        void pauseMusic();
-        void playLine();
-        void playGameOver();
-        void playNewScore();
+        void PlayMusic();
+        void PauseMusic();
+        void PlayLine();
+        void PlayGameOver();
+        void PlayNewScore();
 };
 
 Sonido::Sonido(){
@@ -45,21 +45,21 @@ Sonido::Sonido(){
     gameOverSonido.setBuffer(gameOverBuffer);
 }
 
-void Sonido::playMusic(){
+void Sonido::PlayMusic(){
     musica.play();
 }
 
-void Sonido::pauseMusic(){
+void Sonido::PauseMusic(){
     musica.pause();
 }
 
-void Sonido::playLine(){
+void Sonido::PlayLine(){
     lineaSonido.play();
 }
 
-void Sonido::playNewScore(){
+void Sonido::PlayNewScore(){
     nuevoRecordSonido.play();
 }
-void Sonido::playGameOver(){
+void Sonido::PlayGameOver(){
     gameOverSonido.play();
 }

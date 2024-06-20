@@ -27,15 +27,15 @@ private:
 
 public:
     Campo();
-    bool instalarPieza();
-    bool actTablero();
-    void actColoresTablero();                                       // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
-    void actLimitTimer(int l); 
-    void rotarPieza();
-    void right();
-    void left();
+    bool InstalarPieza();
+    bool ActTablero();
+    void ActColoresTablero();                                       // Actualiza los colores de las celdas del tablero en función de los valores en la matriz 'tablero'.
+    void ActLimitTimer(int l); 
+    void RotarPieza();
+    void Right();
+    void Left();
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const; // Se utiliza para dibujar el tablero en una ventana de SFML.
-    int linea();
+    int Linea();
 };
 
 // Funciones
@@ -60,7 +60,7 @@ Campo::Campo()
 
 }
 
-bool Campo::instalarPieza()
+bool Campo::InstalarPieza()
 {
     srand(time(NULL)); //Inicializa para generar un numero aleatorio
     indNewPieza = rand()%7; //Genera un numero aleaotrio
@@ -117,7 +117,7 @@ bool Campo::instalarPieza()
     return true;
 }
 
-bool Campo::actTablero(){
+bool Campo::ActTablero(){
     bool limit = 0;
     int aux; //Cuantas celdas estan vacias por debajo para poner piezas
 
@@ -154,7 +154,7 @@ bool Campo::actTablero(){
     return limit;
 }
 
-void Campo::actColoresTablero()
+void Campo::ActColoresTablero()
 { // Actualiza los colores de las celdas del tablero
     for (int i = 0; i < 20; i++)
     {
@@ -195,19 +195,19 @@ void Campo::actColoresTablero()
     }
 }
 
-void Campo::actLimitTimer(int l){
+void Campo::ActLimitTimer(int l){
     limitTimer = l;
 }
 
-void Campo::rotarPieza(){ //Rotar pieza
-    block.rotarPieza(indNewPieza);
+void Campo::RotarPieza(){ //Rotar pieza
+    block.RotarPieza(indNewPieza);
     vector<vector<bool>> pieza = block.consultarPieza(indNewPieza);
     int tam = (int)pieza.size();
     for(int i = 0; i < tam; i++){
         for(int j = 0; j < tam; j++){
             if(pieza[i][j]){
                 if(indY + i < 0 || indY + i >= 20 || indX + j < 0 || indX + j >= 10 || tablero[indY+1][indX+j] > 0){
-                    block.desrotarPieza(indNewPieza); //Rotacion imposible
+                    block.DesrotarPieza(indNewPieza); //Rotacion imposible
                     return;
                 }
             }
@@ -229,7 +229,7 @@ void Campo::rotarPieza(){ //Rotar pieza
     }
 }
 
-void Campo::right(){ //Mover a la izquierda la pieza
+void Campo::Right(){ //Mover a la izquierda la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 10; j++){
@@ -250,7 +250,7 @@ void Campo::right(){ //Mover a la izquierda la pieza
     }
 }
 
-void Campo::left(){ //Mover a la derecha la pieza
+void Campo::Left(){ //Mover a la derecha la pieza
     int aux = 0;
     for(int i = 0; i < 20; i++){
         for(int j = 1; j < 10; j++){
@@ -271,7 +271,7 @@ void Campo::left(){ //Mover a la derecha la pieza
     }
 }
 
-int Campo::linea(){ //Funcion para llevar a cabo la deteccion y eliminacion de una linea
+int Campo::Linea(){ //Funcion para llevar a cabo la deteccion y eliminacion de una linea
     int aux = 0;
     int lineas = 0;
 
